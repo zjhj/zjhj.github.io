@@ -20,19 +20,19 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+  <meta name="description" content="问题分析描述 这是个逆向题 二进制文件  文件信息 使用checksec查看：12345678[*] &amp;#x27;&#x2F;home&#x2F;hj&#x2F;tmp&#x2F;flag&amp;#x27;    Arch:     amd64-64-little    RELRO:    No RELRO    Stack:    No canary found    NX:       NX disabled    PIE:      N">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://example.com/2022/12/31/hello-world/index.html">
+<meta property="og:title" content="pwnable-kr-flag">
+<meta property="og:url" content="http://example.com/2023/01/11/pwnable-kr-flag/index.html">
 <meta property="og:site_name" content="退笔成山未足珍，读书万卷始通神">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="问题分析描述 这是个逆向题 二进制文件  文件信息 使用checksec查看：12345678[*] &amp;#x27;&#x2F;home&#x2F;hj&#x2F;tmp&#x2F;flag&amp;#x27;    Arch:     amd64-64-little    RELRO:    No RELRO    Stack:    No canary found    NX:       NX disabled    PIE:      N">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-12-31T09:20:37.839Z">
-<meta property="article:modified_time" content="2022-12-31T09:20:37.839Z">
+<meta property="article:published_time" content="2023-01-11T08:58:37.000Z">
+<meta property="article:modified_time" content="2023-01-11T09:16:09.724Z">
 <meta property="article:author" content="工丁">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/2022/12/31/hello-world/">
+<link rel="canonical" href="http://example.com/2023/01/11/pwnable-kr-flag/">
 
 
 <script id="page-configurations">
@@ -45,7 +45,7 @@
   };
 </script>
 
-  <title>Hello World | 退笔成山未足珍，读书万卷始通神</title>
+  <title>pwnable-kr-flag | 退笔成山未足珍，读书万卷始通神</title>
   
 
 
@@ -150,7 +150,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/12/31/hello-world/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/01/11/pwnable-kr-flag/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -163,7 +163,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Hello World
+          pwnable-kr-flag
         </h1>
 
         <div class="post-meta">
@@ -172,8 +172,9 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2022-12-31 17:20:37" itemprop="dateCreated datePublished" datetime="2022-12-31T17:20:37+08:00">2022-12-31</time>
+              <time title="创建时间：2023-01-11 16:58:37 / 修改时间：17:16:09" itemprop="dateCreated datePublished" datetime="2023-01-11T16:58:37+08:00">2023-01-11</time>
             </span>
 
           
@@ -187,19 +188,24 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+        <h3 id="问题分析"><a href="#问题分析" class="headerlink" title="问题分析"></a>问题分析</h3><h4 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h4><ol>
+<li>这是个逆向题</li>
+<li><a target="_blank" rel="noopener" href="http://pwnable.kr/bin/flag">二进制文件</a></li>
+</ol>
+<h4 id="文件信息"><a href="#文件信息" class="headerlink" title="文件信息"></a>文件信息</h4><ol>
+<li>使用checksec查看：<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[*] &#x27;/home/hj/tmp/flag&#x27;</span><br><span class="line">    Arch:     amd64-64-little</span><br><span class="line">    RELRO:    No RELRO</span><br><span class="line">    Stack:    No canary found</span><br><span class="line">    NX:       NX disabled</span><br><span class="line">    PIE:      No PIE (0x400000)</span><br><span class="line">    RWX:      Has RWX segments</span><br><span class="line">    Packer:   Packed with UPX</span><br></pre></td></tr></table></figure></li>
+<li>注意到最后一行，文件是UPX处理过的，需要先用upx解压后再处理</li>
+</ol>
+<h3 id="问题解决"><a href="#问题解决" class="headerlink" title="问题解决"></a>问题解决</h3><h4 id="解压"><a href="#解压" class="headerlink" title="解压"></a>解压</h4><ol>
+<li>upx可以到<a target="_blank" rel="noopener" href="https://upx.github.io/">官方网站</a>下载</li>
+<li>执行upx -d flag后，checksec显示如下：<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[*] &#x27;/home/hj/tmp/flag&#x27;</span><br><span class="line">    Arch:     amd64-64-little</span><br><span class="line">    RELRO:    Partial RELRO</span><br><span class="line">    Stack:    No canary found</span><br><span class="line">    NX:       NX enabled</span><br><span class="line">    PIE:      No PIE (0x400000)</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h4 id="调试"><a href="#调试" class="headerlink" title="调试"></a>调试</h4><ol>
+<li>直接执行，可以看到提示信息：<code>I will malloc() and strcpy the flag there. take it.</code></li>
+<li>gdb调试，汇编代码如下：<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">gdb-peda$ disas</span><br><span class="line">Dump of assembler code for function main:</span><br><span class="line">   0x0000000000401164 &lt;+0&gt;:     push   rbp</span><br><span class="line">   0x0000000000401165 &lt;+1&gt;:     mov    rbp,rsp</span><br><span class="line">=&gt; 0x0000000000401168 &lt;+4&gt;:     sub    rsp,0x10</span><br><span class="line">   0x000000000040116c &lt;+8&gt;:     mov    edi,0x496658</span><br><span class="line">   0x0000000000401171 &lt;+13&gt;:    call   0x402080 &lt;puts&gt;</span><br><span class="line">   0x0000000000401176 &lt;+18&gt;:    mov    edi,0x64</span><br><span class="line">   0x000000000040117b &lt;+23&gt;:    call   0x4099d0 &lt;malloc&gt;</span><br><span class="line">   0x0000000000401180 &lt;+28&gt;:    mov    QWORD PTR [rbp-0x8],rax</span><br><span class="line">   0x0000000000401184 &lt;+32&gt;:    mov    rdx,QWORD PTR [rip+0x2c0ee5]        # 0x6c2070 &lt;flag&gt;</span><br><span class="line">   0x000000000040118b &lt;+39&gt;:    mov    rax,QWORD PTR [rbp-0x8]</span><br><span class="line">   0x000000000040118f &lt;+43&gt;:    mov    rsi,rdx</span><br><span class="line">   0x0000000000401192 &lt;+46&gt;:    mov    rdi,rax</span><br><span class="line">   0x0000000000401195 &lt;+49&gt;:    call   0x400320</span><br><span class="line">   0x000000000040119a &lt;+54&gt;:    mov    eax,0x0</span><br><span class="line">   0x000000000040119f &lt;+59&gt;:    leave  </span><br><span class="line">   0x00000000004011a0 &lt;+60&gt;:    ret </span><br></pre></td></tr></table></figure></li>
+<li>可以看到+23处有malloc调用，+49的调用之前有rsi、rdi的赋值应该就是strcpy调用</li>
+<li>可以看到0x6c2070处是flag（存放的是地址），查询后再以字符串形式打印即可：<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">gdb-peda$ x/gx 0x6c2070  </span><br><span class="line">0x6c2070 &lt;flag&gt;:        0x0000000000496628</span><br><span class="line">gdb-peda$ x/s 0x0000000000496628</span><br><span class="line">0x496628:       &quot;UPX...? sounds like a delivery service :)&quot;</span><br></pre></td></tr></table></figure></li>
+</ol>
 
     </div>
 
@@ -214,11 +220,11 @@
 
         
     <div class="post-nav">
-      <div class="post-nav-item"></div>
       <div class="post-nav-item">
-    <a href="/2023/01/02/my-first-blog/" rel="next" title="Pwnable.kr之collision">
-      Pwnable.kr之collision <i class="fa fa-chevron-right"></i>
+    <a href="/2023/01/03/pwnable-kr-bof/" rel="prev" title="pwnable.kr之bof">
+      <i class="fa fa-chevron-left"></i> pwnable.kr之bof
     </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -277,7 +283,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Quick-Start"><span class="nav-number">1.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-a-new-post"><span class="nav-number">1.1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-server"><span class="nav-number">1.2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generate-static-files"><span class="nav-number">1.3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deploy-to-remote-sites"><span class="nav-number">1.4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E5%88%86%E6%9E%90"><span class="nav-number">1.</span> <span class="nav-text">问题分析</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8F%8F%E8%BF%B0"><span class="nav-number">1.1.</span> <span class="nav-text">描述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E4%BF%A1%E6%81%AF"><span class="nav-number">1.2.</span> <span class="nav-text">文件信息</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3"><span class="nav-number">2.</span> <span class="nav-text">问题解决</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%A3%E5%8E%8B"><span class="nav-number">2.1.</span> <span class="nav-text">解压</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%B0%83%E8%AF%95"><span class="nav-number">2.2.</span> <span class="nav-text">调试</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
