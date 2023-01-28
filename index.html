@@ -122,7 +122,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-count">6</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -133,7 +133,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-count">2</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -150,6 +150,144 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/01/18/elf/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="工丁">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="退笔成山未足珍，读书万卷始通神">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 退笔成山未足珍，读书万卷始通神">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/01/18/elf/" class="post-title-link" itemprop="url">elf相关</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-01-18 09:49:51" itemprop="dateCreated datePublished" datetime="2023-01-18T09:49:51+08:00">2023-01-18</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-01-28 13:39:36" itemprop="dateModified" datetime="2023-01-28T13:39:36+08:00">2023-01-28</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="elf-format">ELF Format</h2>
+<ul>
+<li>Linux uses the Executable and Linkable Format(ELF) as a common standard for executables(binaries), object code, shared libraries, and even for core dump.</li>
+<li>ELF is flexible, extendable and cross-platform. ### GOT(Global Offset Table)</li>
+<li>used to dynamically resolve functions that are located in shared libraries</li>
+<li>normally contains pointers that point to the actual location of these functions in the shared libraries in memory</li>
+</ul>
+<h3 id="pltprocedure-linkage-table">PLT(Procedure Linkage Table)</h3>
+<ul>
+<li>present in the .plt section of the binary</li>
+<li>contains</li>
+</ul>
+<h3 id="各section的作用">各section的作用</h3>
+<h4 id="got">.got</h4>
+<ul>
+<li>got[0]：本动态段的（.dynamic段）的状态地址</li>
+<li>got[1]：link_map数据结构描述符地址，其中link_map结构如下： <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">struct link_map</span><br><span class="line">&#123;</span><br><span class="line">   /* Shared library&#x27;s load address. */</span><br><span class="line">   ElfW(Addr) l_addr;</span><br><span class="line">   /* Pointer to library&#x27;s name in the string table. */</span><br><span class="line">   char *l_name;</span><br><span class="line">   /*</span><br><span class="line">        Dynamic section of the shared object.</span><br><span class="line">        Includes dynamic linking info etc.</span><br><span class="line">        Not interesting to us.</span><br><span class="line">   */</span><br><span class="line">   ElfW(Dyn) *l_ld;</span><br><span class="line">   /* Pointer to previous and next link_map node. */</span><br><span class="line">   struct link_map *l_next, *l_prev;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
+<li>got[2]：_dl_runtime_resolve函数地址</li>
+</ul>
+<h4 id="plt">.plt</h4>
+<ul>
+<li>调用链接器来解析某个外部函数的地址, 并填充到.got.plt中, 然后跳转到该函数</li>
+<li>直接在.got.plt中查找并跳转到对应外部函数（如果已经填充过）</li>
+</ul>
+<h4 id="got.plt">.got.plt</h4>
+<ul>
+<li>相当于.plt的GOT全局偏移表</li>
+<li>如果在之前查找过该符号，内容为外部函数的具体地址</li>
+<li>如果没查找过, 则内容为跳转回.plt的代码, 并执行查找</li>
+</ul>
+<h2 id="readelf">Readelf</h2>
+<h2 id="保护相关machanisms-to-harden-elf-binaries">保护相关(machanisms to harden ELF binaries)</h2>
+<h3 id="pieposition-independent-excutables">PIE(Position Independent Excutables)</h3>
+<ul>
+<li>-no-pie / -pie</li>
+</ul>
+<h3 id="relrorelocation-read-only">RELRO(Relocation Read-Only)</h3>
+<ul>
+<li>-z norelro / -z lazy / -z now</li>
+<li><a target="_blank" rel="noopener" href="https://www.redhat.com/en/blog/hardening-elf-binaries-using-relocation-read-only-relro">This page</a> is good</li>
+<li>/proc/PID/maps可用作参考内存段是否可写 #### Partial RELRO</li>
+</ul>
+<ol type="1">
+<li>gcc默认编译结果</li>
+<li>部分区域（.init_array、.fini_array、.jcr、.dynamic、.got）在初始化后被标记为只读</li>
+<li>non-PLT GOT is read-only(.got)</li>
+<li>GOT保持可写（.got.plt）</li>
+</ol>
+<h4 id="full-relro">Full RELRO</h4>
+<ol type="1">
+<li>拥有Partial RELRO的所有特性</li>
+<li>不允许延迟绑定，所有符号在开始即被解析</li>
+<li>Moreover,since lazy resolution is not enabled, the GOT[1] and GOT[2] entries are not initialized. GOT[0] is a the address of the module’s DYNAMIC section. GOT[1] is the virtual load address of the link_map, GOT[2] is the address for the runtime resolver function。</li>
+<li>.got合并.got.plt，GOT[0~2]需要确认一下是不是那三条汇编指令？</li>
+</ol>
+<h3 id="nx">NX</h3>
+<ul>
+<li>-z execstack / -z noexecstack</li>
+</ul>
+<h3 id="canary">Canary</h3>
+<ul>
+<li>-fno-stack-protector / -fstack-protector（针对局部变量包含char数组的函数？） / -fstack-protector-all</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -195,7 +333,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-01-17 15:49:23" itemprop="dateModified" datetime="2023-01-17T15:49:23+08:00">2023-01-17</time>
+      <time title="修改时间：2023-01-18 17:54:05" itemprop="dateModified" datetime="2023-01-18T17:54:05+08:00">2023-01-18</time>
     </span>
 
   
@@ -216,10 +354,26 @@
 <li>login函数的两个scanf调用，整形变量前面没有使用&amp;，那么输入的内容就无法写到这两个变量对应的存储区域</li>
 <li>是否可以通过welcome函数中name的输入对两个passcode变量进行赋值？</li>
 </ol>
-<h4 id="流程分析">流程分析</h4>
+<h4 id="文件信息">文件信息</h4>
+<ul>
+<li>checksec查看文件信息： <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[*] &#x27;/home/hj/tmp/passcode&#x27;</span><br><span class="line">    Arch:     i386-32-little</span><br><span class="line">    RELRO:    Partial RELRO</span><br><span class="line">    Stack:    Canary found</span><br><span class="line">    NX:       NX enabled</span><br><span class="line">    PIE:      No PIE (0x8048000)</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="问题解决">问题解决</h3>
+<h4 id="gdb尝试值指定">gdb尝试值指定</h4>
+<h4 id="got写覆盖">.got写覆盖</h4>
+<ol type="1">
+<li>到proc目录下查看maps内容 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">08048000-08049000 r-xp 00000000 08:01 264221                             /home/hj/tmp/passcode</span><br><span class="line">08049000-0804a000 r--p 00000000 08:01 264221                             /home/hj/tmp/passcode</span><br><span class="line">0804a000-0804b000 rw-p 00001000 08:01 264221                             /home/hj/tmp/passcode</span><br><span class="line">f7dc1000-f7dda000 r--p 00000000 08:01 3452238                            /usr/lib32/libc-2.31.so</span><br></pre></td></tr></table></figure></li>
+<li>readelf -r passcode，结果如下： <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">Relocation section &#x27;.rel.dyn&#x27; at offset 0x388 contains 2 entries:</span><br><span class="line"> Offset     Info    Type            Sym.Value  Sym. Name</span><br><span class="line">08049ff0  00000606 R_386_GLOB_DAT    00000000   __gmon_start__</span><br><span class="line">0804a02c  00000b05 R_386_COPY        0804a02c   stdin@GLIBC_2.0</span><br><span class="line"></span><br><span class="line">Relocation section &#x27;.rel.plt&#x27; at offset 0x398 contains 9 entries:</span><br><span class="line"> Offset     Info    Type            Sym.Value  Sym. Name</span><br><span class="line">0804a000  00000107 R_386_JUMP_SLOT   00000000   printf@GLIBC_2.0</span><br><span class="line">0804a004  00000207 R_386_JUMP_SLOT   00000000   fflush@GLIBC_2.0</span><br><span class="line">0804a008  00000307 R_386_JUMP_SLOT   00000000   __stack_chk_fail@GLIBC_2.4</span><br><span class="line">0804a00c  00000407 R_386_JUMP_SLOT   00000000   puts@GLIBC_2.0</span><br><span class="line">0804a010  00000507 R_386_JUMP_SLOT   00000000   system@GLIBC_2.0</span><br><span class="line">0804a014  00000607 R_386_JUMP_SLOT   00000000   __gmon_start__</span><br><span class="line">0804a018  00000707 R_386_JUMP_SLOT   00000000   exit@GLIBC_2.0</span><br><span class="line">0804a01c  00000807 R_386_JUMP_SLOT   00000000   __libc_start_main@GLIBC_2.0</span><br><span class="line">0804a020  00000907 R_386_JUMP_SLOT   00000000   __isoc99_scanf@GLIBC_2.7</span><br></pre></td></tr></table></figure></li>
+<li>可以看到，0x0804a000开始的一段内容是可写的</li>
+</ol>
 <pre class="mermaid">graph LR
     B((开始))
     A-.text.->C</pre>
+<pre class="mermaid">pie
+    title 为什么总是宅在家里？
+    "喜欢宅" : 15
+    "天气太热或太冷" : 20
+    "穷" : 500</pre>
 <p><span class="math display">\[\begin{equation} \label{eq1}
 e=mc^2
 \end{equation}\]</span></p>
