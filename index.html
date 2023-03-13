@@ -189,7 +189,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2023-03-13 10:20:50 / 修改时间：10:34:22" itemprop="dateCreated datePublished" datetime="2023-03-13T10:20:50+08:00">2023-03-13</time>
+      <time title="创建时间：2023-03-13 10:20:50 / 修改时间：15:58:17" itemprop="dateCreated datePublished" datetime="2023-03-13T10:20:50+08:00">2023-03-13</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -228,8 +228,20 @@
 <h3 id="历史记录中显示每一步坐标">历史记录中显示每一步坐标</h3>
 <h3 id="历史记录列表中加粗显示当前选择">历史记录列表中加粗显示当前选择</h3>
 <h3 id="使用两个循环来渲染出棋盘">使用两个循环来渲染出棋盘</h3>
+<ul>
+<li>在Class Board中，先定义两个数组，然后使用map实现二重循环</li>
+<li>由于react要求通过循环方式渲染的组件必须要有唯一的key，在div、Square的属性均添加了key属性</li>
+<li>react的html和jsx代码混合形式还需要适应 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">renderSquare(i) &#123;</span><br><span class="line">  return &lt;Square key=&#123;i&#125; value=&#123;this.props.squares[i]&#125; onClick=&#123;()=&gt;this.props.onClick(i)&#125;/&gt;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">render() &#123;</span><br><span class="line">  const row = [0,1,2];</span><br><span class="line">  const col = [0,1,2];</span><br><span class="line"> </span><br><span class="line">  return (</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">      &#123; row.map((e,index1) =&gt;</span><br><span class="line">                &lt;div key=&#123;e&#125; className=&quot;board-row&quot;&gt;</span><br><span class="line">                  &#123; col.map((f,index2) =&gt; this.renderSquare(3*index1+index2)) &#125;</span><br><span class="line">                &lt;/div&gt;</span><br><span class="line">      )&#125;</span><br><span class="line">    &lt;div&gt;</span><br></pre></td></tr></table></figure></li>
+</ul>
 <h3 id="升序或降序显示历史记录的按钮">升序或降序显示历史记录的按钮</h3>
 <h3 id="有人获胜时高亮显示三颗棋子">有人获胜时，高亮显示三颗棋子</h3>
+<ul>
+<li>在样式表中添加一个高亮样式，这里是在.square的基础上，添加一个color属性：<code>color: #f19;</code></li>
+<li>渲染Square时，增加传递highlight属性；序号在winner数组中时设置为true： <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">renderSquare(i) &#123;</span><br><span class="line">  if (this.props.winner !== null &amp;&amp; this.props.winner.indexOf(i) &gt;= 0) &#123;</span><br><span class="line">    return &lt;Square highlight=&#123;true&#125; key=&#123;i&#125; value=&#123;this.props.squares[i]&#125; onClick=&#123;()=&gt;this.props.onClick(i)&#125;/&gt;;</span><br><span class="line">  &#125; else &#123;</span><br><span class="line">    return &lt;Square highlight=&#123;false&#125; key=&#123;i&#125; value=&#123;this.props.squares[i]&#125; onClick=&#123;()=&gt;this.props.onClick(i)&#125;/&gt;;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>class Square的渲染函数中，添加对传递属性的判断及处理： <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">class Square extends React.Component &#123;</span><br><span class="line">  render() &#123;</span><br><span class="line">    let currClass = &quot;square&quot;;</span><br><span class="line">    if (this.props.highlight) &#123;</span><br><span class="line">      currClass = &quot;square-hl&quot;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return (</span><br><span class="line">      &lt;button className=&#123;currClass&#125; onClick=&#123;()=&gt;this.props.onClick()&#125;&gt;</span><br></pre></td></tr></table></figure></li>
+<li>需要注意的是，JS中使用in是判断对象是否存在特定属性，无法用于判断数组是否包含某个值，需要使用includes、indexOf等方法</li>
+<li>存在形成两条三连的情况</li>
+</ul>
 <h3 id="无人获胜时显示平局消息">无人获胜时显示平局消息</h3>
 
       
