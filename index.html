@@ -189,7 +189,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2023-03-13 10:20:50 / 修改时间：15:58:17" itemprop="dateCreated datePublished" datetime="2023-03-13T10:20:50+08:00">2023-03-13</time>
+      <time title="创建时间：2023-03-13 10:20:50 / 修改时间：16:49:50" itemprop="dateCreated datePublished" datetime="2023-03-13T10:20:50+08:00">2023-03-13</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -226,7 +226,13 @@
 <li>后续会作为react练习使用，每个改进会尝试用多种方式实现</li>
 </ul>
 <h3 id="历史记录中显示每一步坐标">历史记录中显示每一步坐标</h3>
+<ul>
+<li>使用history数据来获取坐标，记录在step数组中： <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">let currHistory = this.state.history.slice(0,this.state.stepNumber+1)</span><br><span class="line">let steps = [];</span><br><span class="line">let lastSquares=[];</span><br><span class="line">for (let i=0; i&lt;currHistory.length; i++) &#123;</span><br><span class="line">  let currSquares = currHistory[i].squares</span><br><span class="line">  if (i===0) &#123;</span><br><span class="line">    lastSquares = currHistory[i].squares;</span><br><span class="line">  &#125; else &#123;</span><br><span class="line">    for (let j=0; j&lt;currSquares.length; j++) &#123;</span><br><span class="line">      if (currSquares[j] !== lastSquares[j]) &#123;</span><br><span class="line">        steps = steps.concat([[Math.trunc(j/3)+1,j%3+1]]);</span><br><span class="line">        lastSquares = currSquares;</span><br><span class="line">        break;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
 <h3 id="历史记录列表中加粗显示当前选择">历史记录列表中加粗显示当前选择</h3>
+<ul>
+<li>改CSS显示吗？这个有点不明白要干嘛</li>
+</ul>
 <h3 id="使用两个循环来渲染出棋盘">使用两个循环来渲染出棋盘</h3>
 <ul>
 <li>在Class Board中，先定义两个数组，然后使用map实现二重循环</li>
@@ -234,6 +240,11 @@
 <li>react的html和jsx代码混合形式还需要适应 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">renderSquare(i) &#123;</span><br><span class="line">  return &lt;Square key=&#123;i&#125; value=&#123;this.props.squares[i]&#125; onClick=&#123;()=&gt;this.props.onClick(i)&#125;/&gt;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">render() &#123;</span><br><span class="line">  const row = [0,1,2];</span><br><span class="line">  const col = [0,1,2];</span><br><span class="line"> </span><br><span class="line">  return (</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">      &#123; row.map((e,index1) =&gt;</span><br><span class="line">                &lt;div key=&#123;e&#125; className=&quot;board-row&quot;&gt;</span><br><span class="line">                  &#123; col.map((f,index2) =&gt; this.renderSquare(3*index1+index2)) &#125;</span><br><span class="line">                &lt;/div&gt;</span><br><span class="line">      )&#125;</span><br><span class="line">    &lt;div&gt;</span><br></pre></td></tr></table></figure></li>
 </ul>
 <h3 id="升序或降序显示历史记录的按钮">升序或降序显示历史记录的按钮</h3>
+<ul>
+<li>class Board中添加修改显示顺序的按钮： <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;div&gt;</span><br><span class="line">&lt;button onClick=&#123;() =&gt; this.props.changeDisp()&#125;&gt;change order&lt;/button&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure></li>
+<li>class Game的state中添加dispDesc以及对此字段的处理： <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">constructor(props) &#123;</span><br><span class="line">  super(props);</span><br><span class="line">  this.state = &#123;</span><br><span class="line">    history:[&#123;</span><br><span class="line">      squares:Array(9).fill(null),</span><br><span class="line">    &#125;],</span><br><span class="line">    xIsNext: true,</span><br><span class="line">    stepNumber: 0,</span><br><span class="line">    dispDesc: false,</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">changeDisp() &#123;</span><br><span class="line">  this.setState(&#123;</span><br><span class="line">    dispDesc: !this.state.dispDesc,</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>class Game的render部分增加对于dispDesc的判断处理： <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">if (!this.state.dispDesc) &#123;</span><br><span class="line">  currHistory.reverse();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">let stepDesc = currHistory.map((step,m) =&gt; &#123;</span><br><span class="line">  let move = m;</span><br><span class="line">  if (!this.state.dispDesc) &#123;</span><br><span class="line">    move = currHistory.length - m - 1;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
 <h3 id="有人获胜时高亮显示三颗棋子">有人获胜时，高亮显示三颗棋子</h3>
 <ul>
 <li>在样式表中添加一个高亮样式，这里是在.square的基础上，添加一个color属性：<code>color: #f19;</code></li>
@@ -243,6 +254,9 @@
 <li>存在形成两条三连的情况</li>
 </ul>
 <h3 id="无人获胜时显示平局消息">无人获胜时显示平局消息</h3>
+<ul>
+<li>步数达到9，且计算获胜方未得到有效返回： <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">if (winner) &#123;</span><br><span class="line">  status = &#x27;Winner is: &#x27; + squares[winner[0]];</span><br><span class="line">&#125; else &#123;</span><br><span class="line">  if (this.state.stepNumber === 9) &#123;</span><br><span class="line">    status = &#x27;The game ended in a draw!!!&#x27;;</span><br><span class="line">  &#125; else &#123;</span><br><span class="line">    status = &#x27;Next player: &#x27; + (this.state.xIsNext ? &#x27;X&#x27; : &#x27;O&#x27;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
 
       
     </div>
